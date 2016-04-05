@@ -36,21 +36,22 @@ public class ModelData2 {
         // A Java 8 idiom for reading data
         // You could also use BufferedReader
         // read file into stream, try-with-resources
-        try (Stream<String> stream = Files.lines(Paths.get("sc.data"))) {
+        try (Stream<String> stream = Files.lines(Paths.get("coeg.data"))) {
 
             Object[] lines = stream.toArray();
             for (Object line : lines) {
                 if (line instanceof String) {
 
                     String[] split = ((String) line).split(",");
+                    //System.out.println(split.length);
                     double working = 0, failure = 0;
 
                     DataSetRow newRow = null;
 
-                    if (split.length == 8) {
-                        if (split[7].contains("working")) {
+                    if (split.length == 9) {
+                        if (split[8].contains("working")) {
                             working = 1;
-                        } else if (split[7].contains("failure")) {
+                        } else if (split[8].contains("failure")) {
                             failure = 1;
                         } 
 
@@ -96,7 +97,8 @@ public class ModelData2 {
         }
 
         // Let's check the resulting DataSets
-        printTrainingTestingSets(training_testing);
+        //printTrainingTestingSets(training_testing);
+        System.out.println("now compiling dataset");
 
         // Let's make a reference variable for each the training and testing data set
         // to make it easier for us to refer to each later
@@ -116,7 +118,7 @@ public class ModelData2 {
         // Let's say we want to have a 4-2-3 multilayer neural network
         int inputCount = 8;
         int outputCount = 2;
-        int hiddenNeurons = 10;
+        int hiddenNeurons = 2;
 
         MultiLayerPerceptron neuralNet
                 = new MultiLayerPerceptron(inputCount, hiddenNeurons, outputCount);
@@ -125,9 +127,9 @@ public class ModelData2 {
         BackPropagation learningRule = neuralNet.getLearningRule();
 
         // Set some parameters
-        learningRule.setLearningRate(50);
-        learningRule.setMaxError(10);
-        learningRule.setMaxIterations(1000);
+        learningRule.setLearningRate(0.00000001);
+        learningRule.setMaxError(0.01);
+        learningRule.setMaxIterations(200);
 
         // We also set a Listener for learning events
         // In this case, we will define the adding of Listener in a separate method

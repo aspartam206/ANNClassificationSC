@@ -61,7 +61,7 @@ public class HardriveApp {
 		// sepal-width  = 3.1
 		// petal-length = 4.8
 		// petal-width  = 1.5
-		double[] input = { 7.1, 3.1, 4.8, 1.5 };
+		double[] input = { 32321, 72174, 3321, 3121, 321321, 32321, 321321, 4214321 };
 		
 		// Before inputting into the model, don't forget to normalize the input
 		double[] normalizedInput = new double[input.length];
@@ -91,7 +91,7 @@ public class HardriveApp {
 	
 	public static void interpret(double[] prediction) {
 		
-		String[] labels = { "Iris Setosa", "Iris Versicolor", "Iris Virginica" };
+		String[] labels = { "Working", "Failure"};
 		
 		System.out.println("\nThe data is predicted as " + labels[maxOutput(prediction)]);
 	}
